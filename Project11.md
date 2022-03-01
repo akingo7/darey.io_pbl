@@ -14,6 +14,7 @@
 
 
 - Install ansible, jdk and jenkins
+
 ![Screenshot from 2022-02-28 21-50-44](https://user-images.githubusercontent.com/80127136/156161898-696dbed6-4de6-4cdb-a39d-356dce208c4a.png)
 ![Screenshot from 2022-02-28 21-51-26](https://user-images.githubusercontent.com/80127136/156161919-83af42fa-c63b-468e-bd0c-4ade199899ec.png)
 ![Screenshot from 2022-02-28 21-54-00](https://user-images.githubusercontent.com/80127136/156161927-7a4efe5b-7483-45a0-a913-ee57c2902edd.png)
