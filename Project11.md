@@ -26,7 +26,7 @@
 ### Run Ansible Playbook
 - Then I tried to run the ansible playbook I got some error messages which I move to my vscode, check the code again made some changes in the inventory and playbook file. Then I marge the code to the master branch run the new achive file in the playbook and I got another error which made me to review, marge and run the playbook.    
 After doing that 3 to 4 times I realized the I have to input "yes" to add the signature of the server in the inventory file and my playbook run successfully except for the host that I added wrong command usage in the playbook.
-- Then I went to each of the server from one server to another to check if wireshark is the by checking the version and using `which command`.
+- Then I went to each of the server from one server to another to check if wireshark is the by checking the version and using `which command` which is very interesting and easy to move from one server to another without adding the private key to connection only by adding the flag `-A`.
 
 Thank You
 
