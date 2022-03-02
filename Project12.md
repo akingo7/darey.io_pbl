@@ -61,6 +61,8 @@
 
 - This is the point where I got stucked for sometime which is because I wrote the task myself and I was specifying tasks in the task. Secondly I used `ansible.builtin.command` and I realized that I can't run command like that and I had to use `command` module instead of `ansible.builtin.command`. The next is that I wanted to run loop to install httpd and git but I remembered that I can't run loop in static reuse of code but in dynamic reuse of code. Lastly I wanted to use `ansible.builtin.git` to install git which doesn't make sense and it's not like I don't know that I had to use `ansible.builtin.yum` maybe it's because I was sleepy cause I didn't sleep for that night till I completed the project.
 
+- After running the playbook completely, I ssh into each server to check if httpd and git are present then check if the tooling repository content is in "/var/www/html"
+
 Thank You
 
 
