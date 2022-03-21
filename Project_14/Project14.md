@@ -71,7 +71,6 @@ ansible_python_interpreter=/usr/bin/python
 parameters {
       string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
     }
-
 ```
 
 - Then introduce tags to the ansible playbook to limit the tasks to the tag specified in the jenkins UI or jenkinsfile
