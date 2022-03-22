@@ -28,6 +28,12 @@
 
 - Then I created Internal Application Load Balancer which I edited the rules to map to wordpress target group if the host address is "www.gabrieldevops.ml" or "gabrieldevops.ml" then if the host address is "tooling.gabrieldevops.ml" it should map to the tooling target group on port 80.
 
-- Created Internet Facing Application Load Balancer with nginx reverse proxy as the target group which is listening on port 443 and 80. I then created autoscaling group for Bastion Server, Nginx Server, Tooling Webserver and Wordpress Webserver in the two AZ. The minimum number of instance is 2 , maximum is 2 and the desired is 2 so that I will have only one instance in on AZ.
+- Created Internet Facing Application Load Balancer with nginx reverse proxy as the target group which is listening on port 443 and 80. 
+
+
+- I then created autoscaling group for Bastion Server, Nginx Server, Tooling Webserver and Wordpress Webserver in the two AZ. The minimum number of instance is 2 , maximum is 2 and the desired is 2 so that I will have only one instance in on AZ.
+
+
+- I then created three record on route53 for gabrieldevops.ml, www.gabrieldevops.ml and tooling.gabrieldevops.ml. Using alias record, all the host names are mapping to the Internet Facing ALB.
 
 - Then I entered the domain name on my browser to test it.
