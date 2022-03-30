@@ -1,7 +1,7 @@
 # AUTOMATE INFRASTRUCTURE WITH IAC USING TERRAFORM PART 2
 
 
-Link to Project: 
+Click [https://github.com/akingo7/darey.io_pbl/tree/main/PBL]('HCL') to view the files
 
 
 
@@ -172,6 +172,9 @@ resource "aws_route_table_association" "public_rta" {
 ```
 
 - Then I run `teraform graph | dot Tsvg > <filename>`.
+![Screenshot from 2022-03-29 05-23-45](https://user-images.githubusercontent.com/80127136/160905558-678939e2-5acf-4d54-b7cd-96a2357245cf.png)
+
+
 - Run `terraform plan` and `terraform apply`
 
 - Create an assume role and IAM policy.
@@ -1155,3 +1158,18 @@ resource "aws_db_instance" "ACS-rds" {
   multi_az               = "true"
 }
 ```
+
+![Screenshot from 2022-03-29 05-18-50](https://user-images.githubusercontent.com/80127136/160904694-0d945dc2-8aa0-4a63-8a09-6985f7233036.png)
+
+![Screenshot from 2022-03-29 05-14-32](https://user-images.githubusercontent.com/80127136/160904514-6da1244d-80d7-4433-a494-22517ff3975d.png)
+![Screenshot from 2022-03-29 05-15-07](https://user-images.githubusercontent.com/80127136/160904572-d3103923-d89a-4112-af77-b167d4c1d8ae.png)
+![Screenshot from 2022-03-29 05-16-03](https://user-images.githubusercontent.com/80127136/160904617-0ac66795-c944-4472-8b69-0fd819de2677.png)
+![Screenshot from 2022-03-29 05-17-00](https://user-images.githubusercontent.com/80127136/160904644-1ff77849-e0aa-4d51-942d-4f548b237dc1.png)
+![Screenshot from 2022-03-30 00-19-19](https://user-images.githubusercontent.com/80127136/160904883-c4eb5465-2a90-4cd0-9b33-da41c30066ee.png)
+![Screenshot from 2022-03-30 00-20-32](https://user-images.githubusercontent.com/80127136/160904917-0711480d-bacd-4295-8f52-e54a8a912262.png)
+![Screenshot from 2022-03-30 00-22-58](https://user-images.githubusercontent.com/80127136/160904969-a4556542-6a23-42c7-97b2-a270523380e7.png)
+![Screenshot from 2022-03-30 00-23-57](https://user-images.githubusercontent.com/80127136/160905023-44b57c34-6bc9-499e-8c81-0c6d3daeb185.png)
+![Screenshot from 2022-03-30 00-24-55](https://user-images.githubusercontent.com/80127136/160905068-6ca76227-cbe6-47ad-b344-0ced594d1da4.png)
+![Screenshot from 2022-03-30 00-27-11](https://user-images.githubusercontent.com/80127136/160905100-1aee599a-a8d7-43b7-ab0f-b245b73b08ba.png)
+
+
