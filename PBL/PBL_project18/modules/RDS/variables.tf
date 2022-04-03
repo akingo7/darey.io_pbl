@@ -1,0 +1,13 @@
+variable "name" {}
+variable "tags" {}
+variable "private_subnet3_id" {}
+variable "private_subnet4_id" {}
+variable "db_instance_class" {}
+variable "db_name" {}
+variable "database_security_group_id" {}
+variable "master-username" {}
+variable "master-password" {}
+variable "db_engine" {}
+variable "db_allocated_storage" {}
+variable "db_storage_type" {}
+variable "multi_az_db" {}
