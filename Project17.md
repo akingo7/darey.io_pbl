@@ -1,7 +1,7 @@
 # AUTOMATE INFRASTRUCTURE WITH IAC USING TERRAFORM PART 2
 
 
-Click ['https://github.com/akingo7/darey.io_pbl/tree/main/PBL'](PBL) to view the files
+Click [PBL](https://github.com/akingo7/darey.io_pbl/tree/main/PBL/PBL_project17) to view the files
 
 
 
