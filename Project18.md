@@ -42,6 +42,9 @@ resource "aws_dynamodb_table" "terraform_locks" {
 
 - After adding the code then I run `terraform apply` to create the resource since terraform want us to create the resource before configuring the backend.
 
+![Screenshot from 2022-04-01 00-13-11](https://user-images.githubusercontent.com/80127136/161439838-6141d555-bc5f-4a53-99d0-10f03b974c3e.png)
+![Screenshot from 2022-03-31 23-53-52](https://user-images.githubusercontent.com/80127136/161439848-5ca2c666-f107-4068-8b45-1d2abd019098.png)
+
 - After the resource is created successfully I added the backend block to configure s3 backed.
 
 ```hcl
@@ -58,6 +61,12 @@ resource "aws_dynamodb_table" "terraform_locks" {
 ```
 
 - Then I re-initialize terraform.
+
+![Screenshot from 2022-04-01 00-23-06](https://user-images.githubusercontent.com/80127136/161439883-c376619b-e673-476e-836a-ae03d1c7217c.png)
+![Screenshot from 2022-04-01 00-23-22](https://user-images.githubusercontent.com/80127136/161439896-209883e0-162c-4302-b6d4-40ac2d33cd57.png)
+![Screenshot from 2022-04-01 00-35-27](https://user-images.githubusercontent.com/80127136/161439922-3e610ba6-db8d-408d-83a9-9754e43bf142.png)
+![Screenshot from 2022-04-01 00-29-44](https://user-images.githubusercontent.com/80127136/161439936-02e1c16d-7a13-479b-a06b-ed20b1da07e1.png)
+![Screenshot from 2022-04-01 01-56-05](https://user-images.githubusercontent.com/80127136/161439945-c85fbeb1-111b-4054-93e4-63047f73212c.png)
 
 ## Refactoring Project Using Modules
 
@@ -156,3 +165,4 @@ module "asg" {
 
 }
 ```
+![Screenshot from 2022-04-03 00-07-22](https://user-images.githubusercontent.com/80127136/161440027-3b90e4fa-a8ef-40e7-b861-dca9cf537965.png)
