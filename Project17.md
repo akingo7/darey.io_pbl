@@ -1,18 +1,14 @@
 # AUTOMATE INFRASTRUCTURE WITH IAC USING TERRAFORM PART 2
 
-
 Click [PBL](https://github.com/akingo7/darey.io_pbl/tree/main/PBL/PBL_project17) to view the files
 
+- Most of the codes in this project are hard coded which I will work on when I get to project 18.
 
-
-- Most of the codes in this project are hard coded with I will work on when I get to project 18.
-
-
-### Networking
+## Networking
 
 - I recreated VPC form project one and the public subnet
 
-```
+```hcl
 resource "aws_vpc" "vpc" {
   cidr_block                     = var.cidr_block
   enable_dns_support             = var.enable_dns_support
@@ -45,7 +41,7 @@ resource "aws_subnet" "public" {
 
 - Then I introduced random_shuffle resource to the code and pass in the availability zone data source so that I will have enough AZ to work with when the number of subnets increase.
 
-```
+```hcl
 resource "random_shuffle" "aws_availability_zones" {
   input        = [data.aws_availability_zones.available.names[1], data.aws_availability_zones.available.names[0]]
   result_count = var.max_number_of_az
@@ -54,7 +50,7 @@ resource "random_shuffle" "aws_availability_zones" {
 
 - Then I added the code to create four private subnet.
 
-```
+```hcl
 
 resource "aws_subnet" "private" {
   count                   = local.preferred_number_of_private_subnets
@@ -73,7 +69,7 @@ resource "aws_subnet" "private" {
 
 - Create an Internet Gateway in a file `internet_gateway.tf`
 
-```
+```hcl
 resource "aws_internet_gateway" "ig" {
   vpc_id = aws_vpc.vpc.id
 
@@ -89,7 +85,7 @@ resource "aws_internet_gateway" "ig" {
 
 - Create one NAT Gateway and one Elastic IP address
 
-```
+```hcl
 resource "aws_eip" "nat_eip" {
   vpc = true
   depends_on = [
@@ -123,7 +119,7 @@ resource "aws_nat_gateway" "nat_gateway" {
 
 - Create route table with  aws_route_table resource and route association for the private subnets
 
-```
+```hcl
 
 resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.vpc.id
@@ -143,9 +139,9 @@ resource "aws_route_table_association" "private_rta" {
 }
 ```
 
-- Create route table, route and route table assosiation for public subnet.
+- Create route table, route and route table association for public subnet.
 
-```
+```hcl
 
 resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.vpc.id
@@ -171,7 +167,7 @@ resource "aws_route_table_association" "public_rta" {
 }
 ```
 
-- Then I run `teraform graph | dot Tsvg > <filename>`.
+- Then I run `terraform graph | dot Tsvg > <filename>`.
 ![Screenshot from 2022-03-29 05-23-45](https://user-images.githubusercontent.com/80127136/160905558-678939e2-5acf-4d54-b7cd-96a2357245cf.png)
 
 
@@ -179,7 +175,7 @@ resource "aws_route_table_association" "public_rta" {
 
 - Create an assume role and IAM policy.
 
-```
+```hcl
 resource "aws_iam_role" "ec2_instance_role" {
   name = "ec2_instance_role"
   assume_role_policy = jsonencode({
@@ -233,7 +229,7 @@ resource "aws_iam_policy" "policy" {
 
 - Then attach the policy to the assume role with.
 
-```
+```hcl
 
 resource "aws_iam_role_policy_attachment" "test-attach" {
   role       = aws_iam_role.ec2_instance_role.name
@@ -244,7 +240,7 @@ resource "aws_iam_role_policy_attachment" "test-attach" {
 
 - Create an instance profile .
 
-```
+```hcl
 
 resource "aws_iam_instance_profile" "ip" {
   name = "aws_instance_profile_test"
@@ -256,7 +252,7 @@ resource "aws_iam_instance_profile" "ip" {
 
 - Create security group in the file `security.tf`.
 
-```
+```hcl
 # --- External Load Balancer ---
 resource "aws_security_group" "external_lb" {
   name        = "external_lb"
@@ -553,10 +549,9 @@ resource "aws_route53_record" "wordpress" {
 }
 ```
 
-
 - Create an external (Internet facing) Application Load Balancer, target group and listener in the file alb.tf.
 
-```
+```hcl
 resource "aws_lb" "lb" {
   name     = "ext-alb"
   internal = false
@@ -612,7 +607,7 @@ resource "aws_lb_listener" "nginx-listner" {
 
 - Create an Internal Application load balancer, target group for the tooling and wordpress each and listener rule.
 
-```
+```hcl
 resource "aws_lb" "ialb" {
   name     = "ialb"
   internal = true
@@ -709,7 +704,7 @@ resource "aws_lb_listener_rule" "tooling-listener" {
 
 - Create Autoscaling Group and Launch template for Bastion and nginx in the file bastion-nginx.tf.
 
-```
+```hcl
 resource "aws_key_pair" "keypair" {
   key_name = "mykey"
   public_key = file("./devops.pub")
@@ -851,7 +846,7 @@ resource "aws_autoscaling_attachment" "asg_attachment_nginx" {
 
 - Create Autoscaling group and Launch template for wordpress and tooling in the file tooling-wordpress.tf.
 
-```
+```hcl
 # launch template for wordpress
 
 resource "aws_launch_template" "wordpress-launch-template" {
@@ -992,7 +987,7 @@ resource "aws_autoscaling_attachment" "asg_attachment_tooling" {
 
 - Create notification for all the auto scaling group.
 
-```
+```hcl
 
 resource "aws_sns_topic" "sns" {
   name = "user-updates-topic"
@@ -1022,7 +1017,7 @@ resource "aws_autoscaling_notification" "autoscaling_notifications" {
 
 - Create KMS key.
 
-```
+```hcl
 resource "aws_kms_key" "ACS-kms" {
   description = "KMS key "
   policy      = <<EOF
@@ -1063,8 +1058,7 @@ resource "aws_efs_file_system" "ACS-efs" {
 
 - Create EFS and it's mount targets.
 
-```
-
+```hcl
 # set first mount target for the EFS 
 resource "aws_efs_mount_target" "subnet-1" {
   file_system_id  = aws_efs_file_system.ACS-efs.id
@@ -1127,7 +1121,7 @@ resource "aws_efs_access_point" "tooling" {
 
 - Create MySQL Relational Database Service.
 
-```
+```hcl
 
 resource "aws_db_subnet_group" "ACS-rds" {
   name       = "acs-rds"
