@@ -36,6 +36,6 @@
 
 - Import the module into my private registry.
 
-- Create a configuration that uses the module in another repository.
+- Created a configuration that uses the module in another repository.
 
-- Create a workspace for the configuration and deploy the infrastructure.
+- Created a workspace for the configuration and deploy the infrastructure.
