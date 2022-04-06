@@ -22,7 +22,7 @@
 
 ![Screenshot from 2022-04-05 23-06-04](https://user-images.githubusercontent.com/80127136/162087170-a44b6635-d1bb-415e-a078-c046862ca8f0.png)
 
-- I then used packer to build Ubuntu 20.04 image for nginx, bastion, tooling and wordpress with provisional to run shell script. When I tried to build the image I got an error which is because I used the same source to build 4 images which doesn't work like that. Then I checked "hashicorp" learning site to learn how it works.
+- I then used packer to build Ubuntu 20.04 image for nginx, bastion, tooling and wordpress with provisional to run shell script. When I tried to build the image I got an error which is because I used the same source to build 4 images which doesn't work like that. Then I checked [Hashicorp](learn.hashicorp.com/packer) learning site to learn how it works.
 
 ![Screenshot from 2022-04-05 17-41-17](https://user-images.githubusercontent.com/80127136/162087242-d5497849-227b-4766-b56a-658a80f9b502.png)
 ![Screenshot from 2022-04-05 21-10-06](https://user-images.githubusercontent.com/80127136/162087264-5b271589-b7ed-41c6-ba39-0027cff30f85.png)
@@ -38,7 +38,7 @@
 ![Screenshot from 2022-04-05 23-26-34](https://user-images.githubusercontent.com/80127136/162087566-2a3cc563-59fc-45e3-879d-c00d110faf71.png)
 
 - The health check for my wordpress and tooling website failed because their success code is 302 which I solved by adding health_check matcher of "200-303". This is because the nat gateway is in the private subnet which I later changed to the public subnet.
- 
+
 ![Screenshot from 2022-04-05 23-29-52](https://user-images.githubusercontent.com/80127136/162087817-cdf8e7c0-f076-4925-89f2-df6872b6eb5b.png)
 ![Screenshot from 2022-04-06 00-03-40](https://user-images.githubusercontent.com/80127136/162089406-290d3d75-61f5-4be7-b977-7bcc19b3739a.png)
 
@@ -59,7 +59,7 @@
 ![Screenshot from 2022-04-06 02-11-22](https://user-images.githubusercontent.com/80127136/162089906-b929a0b8-d0e3-4d2f-a39a-b810371d6734.png)
 ![Screenshot from 2022-04-06 02-15-29](https://user-images.githubusercontent.com/80127136/162089937-23017ea0-6bac-4240-a0bc-87e1f5c3a8bc.png)
 
-- Create an Email notifications for plan, error,... events and test it. I was unable to create the notificaton for slack because I will have to wait for slack to verify the workspace that I just created.
+- Create an Email notifications for plan, error,... events and test it. I was unable to create the notification for slack because I will have to wait for slack to verify the workspace that I just created.
 
 ![Screenshot from 2022-04-06 15-40-42](https://user-images.githubusercontent.com/80127136/162090445-eb4ed4d5-888f-43ea-97df-9f53d6f21850.png)
 
@@ -97,6 +97,5 @@
 - Then I destroyed the infrastructure.
 
 ![Screenshot from 2022-04-06 17-33-48](https://user-images.githubusercontent.com/80127136/162091182-3c3e39e4-aa89-4e2a-ad99-dc8c208db6a2.png)
-
 
 Thank You
