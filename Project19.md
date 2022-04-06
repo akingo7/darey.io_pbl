@@ -36,6 +36,6 @@
 
 - Import the module into my private registry.
 
-- Created a configuration that uses the module in another repository.
+- Created a configuration that uses the module in another [repository](https://github.com/akingo7/terramain).
 
 - Created a workspace for the configuration and deploy the infrastructure.
