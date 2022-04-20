@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+# Create an encryption-config.yaml file as documented officially by kubernetes
+cat > encryption-config.yaml <<EOF
+kind: EncryptionConfig
+apiVersion: v1
+resources:
+  - resources:
+      - secrets
+    providers:
+      - aescbc:
+          keys:
+            - name: key1
+              secret: ${ETCD_ENCRYPTION_KEY}
+      - identity: {}
+EOF
