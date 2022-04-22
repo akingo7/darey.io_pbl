@@ -1,22 +1,36 @@
 # ORCHESTRATING CONTAINERS ACROSS MULTIPLE VIRTUAL SERVERS WITH KUBERNETES. PART 1
 
+- For this project I used cloud9 as my client workspace.
+
+![error](screenshots/Screenshot%202022-04-20%20141448.png)
+
 ## INSTALL CLIENT TOOLS BEFORE BOOTSTRAPPING THE CLUSTER
 
 - To configure your AWS CLI – run your shell (or cmd if using Windows) and run:
 
 ```sh
  aws configure --profile %your_username%
-AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
-AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+AWS Access Key ID [None]: AKIAI***
+AWS Secret Access Key [None]: wJalrXUtnK7M***
 Default region name [None]: us-west-2
 Default output format [None]: json
 ```
 
+<<<<<<< HEAD
+![error](screenshots/Screenshot%202022-04-20%20141640.png)
+
 - Test your AWS CLI by running: `aws ec2 describe-vpcs`.
+
+![error](screenshots/Screenshot%202022-04-20%20143815.png)
+=======
+- Test your AWS CLI by running: `aws ec2 describe-vpcs`.
+>>>>>>> 826a16657b3175dcd4f5b993a19b2ace8c72c68b
 
 - Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 
 - Verify that kubectl version 1.21.0 or higher is installed: `kubectl version --client`
+
+![error](screenshots/Screenshot%202022-04-20%20144458.png)
 
 ## Install CFSSL and CFSSLJSON
 
@@ -30,11 +44,40 @@ sudo mv cfssl cfssljson /usr/local/bin/
 cfssl version
 ```
 
+![error](screenshots/Screenshot%202022-04-20%20152113.png)
+
 ## AWS CLOUD RESOURCES FOR KUBERNETES CLUSTER
 
-- Configure Network Infrastructure
+- Link to AWS Cloud Resources Code can be found [here](k8s-cluster-from-ground-up/Configure_Network_Infrastructure)
+
+![error](screenshots/Screenshot%202022-04-20%20152949.png)
+![error](screenshots/Screenshot%202022-04-20%20153214.png)
+![error](screenshots/Screenshot%202022-04-20%20153240.png)
+![error](screenshots/Screenshot%202022-04-20%20153411.png)
+![error](screenshots/Screenshot%202022-04-20%20154928.png)
+![error](screenshots/Screenshot%202022-04-20%20155021.png)
+![error](screenshots/Screenshot%202022-04-20%20155108.png)
+![error](screenshots/Screenshot%202022-04-20%20155200.png)
+![error](screenshots/Screenshot%202022-04-20%20160347.png)
+![error](screenshots/Screenshot%202022-04-20%20160417.png)
+![error](screenshots/Screenshot%202022-04-20%20160538.png)
+![error](screenshots/Screenshot%202022-04-20%20160618.png)
+![error](screenshots/Screenshot%202022-04-20%20160853.png)
+![error](screenshots/Screenshot%202022-04-20%20160938.png)
+![error](screenshots/Screenshot%202022-04-20%20161031.png)
+![error](screenshots/Screenshot%202022-04-20%20162541.png)
 
 ## PREPARE THE SELF-SIGNED CERTIFICATE AUTHORITY AND GENERATE TLS CERTIFICATES
+
+- Code used to generate Self-signed certificate can be found [here](k8s-cluster-from-ground-up/Certificates.md)
+
+![error](screenshots/Screenshot%202022-04-20%20165529.png)
+![error](screenshots/Screenshot%202022-04-20%20165546.png)
+![error](screenshots/Screenshot%202022-04-20%20165632.png)
+![error](screenshots/Screenshot%202022-04-20%20170221.png)
+![error](screenshots/Screenshot%202022-04-20%20170436.png)
+![error](screenshots/Screenshot%202022-04-20%20171516.png)
+![error](screenshots/Screenshot%202022-04-20%20184656.png)
 
 ## DISTRIBUTING THE CLIENT AND SERVER CERTIFICATES
 
@@ -65,9 +108,15 @@ instance="${NAME}-master-${i}" \
 done
 ```
 
+![error](screenshots/Screenshot%202022-04-20%20184935.png)
+
 ## USE `KUBECTL` TO GENERATE KUBERNETES CONFIGURATION FILES FOR AUTHENTICATION
 
 - Generate the kubelet kubeconfig file
+
+![error](screenshots/Screenshot%202022-04-20%20190602.png)
+![error](screenshots/Screenshot%202022-04-20%20191100.png)
+![error](screenshots/Screenshot%202022-04-20%20192105.png)
 
 - Distribute the ".kubeconfig" files to their respective servers
 
@@ -78,9 +127,9 @@ for i in 0 1 2; do
   external_ip=$(aws ec2 describe-instances \
     --filters "Name=tag:Name,Values=${instance}" \
     --output text --query 'Reservations[].Instances[].PublicIpAddress')
-    ssh -i ../ssh/${NAME}.id_rsa ubuntu@${external_ip} "mkdir ~/.kube"
+  #ssh -i ../ssh/${NAME}.id_rsa ubuntu@${external_ip} "mkdir ~/.kube"
   scp -i ../ssh/${NAME}.id_rsa admin.kubeconfig \
-    kube-proxy.kubeconfig ${instance}.kubeconfig ubuntu@${external_ip}:~/.kube; 
+    kube-proxy.kubeconfig ${instance}.kubeconfig ubuntu@${external_ip}:~/; 
     done
 
 for i in 0 1 2; do
@@ -88,10 +137,10 @@ instance="${NAME}-master-${i}" \
   external_ip=$(aws ec2 describe-instances \
     --filters "Name=tag:Name,Values=${instance}" \
     --output text --query 'Reservations[].Instances[].PublicIpAddress')
-    ssh -i ../ssh/${NAME}.id_rsa ubuntu@${external_ip} "mkdir ~/.kube"
+# ssh -i ../ssh/${NAME}.id_rsa ubuntu@${external_ip} "mkdir ~/.kube"
   scp -i ../ssh/${NAME}.id_rsa \
   kube-controller-manager.kubeconfig kube-scheduler.kubeconfig \
-  admin.kubeconfig ubuntu@${external_ip}:~/.kube;
+  admin.kubeconfig ubuntu@${external_ip}:~/;
 done
 ```
 
@@ -109,6 +158,9 @@ instance="${NAME}-master-${i}" \
    encryption-config.yaml ubuntu@${external_ip}:~/;
 done
 ```
+
+![error](screenshots/Screenshot%202022-04-20%20231157.png)
+![error](screenshots/Screenshot%202022-04-20%20231848.png)
 
 - SSH into the controller server from ssh directory
 
@@ -133,13 +185,17 @@ master_3_ip=$(aws ec2 describe-instances \
 ssh -i k8s-cluster-from-ground-up.id_rsa ubuntu@${master_3_ip}
 ```
 
+![error](screenshots/Screenshot%202022-04-20%20233434.png)
+![error](screenshots/Screenshot%202022-04-20%20234810.png)
+
 - Download and install etcd
 
 ```sh
   wget -q --show-progress --https-only --timestamping \
   "https://github.com/etcd-io/etcd/releases/download/v3.4.15/etcd-v3.4.15-linux-amd64.tar.gz"
-
 ```
+
+![error](screenshots/Screenshot%202022-04-20%20235407.png)
 
 - Extract and install the etcd server and the etcdctl command line utility:
 
@@ -155,6 +211,8 @@ sudo mv etcd-v3.4.15-linux-amd64/etcd* /usr/local/bin/
   sudo cp ca.pem master-kubernetes-key.pem master-kubernetes.pem /etc/etcd/
 }
 ```
+
+![error](screenshots/Screenshot%202022-04-21%20000652.png)
 
 - The instance internal IP address will be used to serve client requests and communicate with etcd cluster peers. Retrieve the internal IP address for the current compute instance:
 
@@ -172,7 +230,6 @@ echo ${ETCD_NAME}
 ```
 
 - Create the etcd.service systemd unit file:
-
 The flags are well documented [here](https://www.bookstack.cn/read/etcd-3.2.17-en/717bafd59fa87192.md)
 
 ```sh
@@ -219,6 +276,9 @@ sudo systemctl start etcd
 }
 ```
 
+
+![error](screenshots/Screenshot%202022-04-21%20000756.png)
+
 - Verify the etcd installation
 
 ```sh
@@ -228,6 +288,9 @@ sudo ETCDCTL_API=3 etcdctl member list \
   --cert=/etc/etcd/master-kubernetes.pem \
   --key=/etc/etcd/master-kubernetes-key.pem
 ```
+
+![error](screenshots/Screenshot%202022-04-21%20000843.png)
+![error](screenshots/Screenshot%202022-04-21%20000954.png)
 
 ## BOOTSTRAP THE CONTROL PLANE
 
@@ -246,6 +309,8 @@ wget -q --show-progress --https-only --timestamping \
 "https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kube-scheduler" \
 "https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubectl"
 ```
+
+![error](screenshots/Screenshot%202022-04-21%20001841.png)
 
 - Install the Kubernetes binaries:
 
@@ -429,6 +494,11 @@ sudo systemctl status kube-scheduler
 }
 ```
 
+- The api-server did not start after running `sudo systemctl status kube-apiserver`, so I checked the syslog file and found out that the expected length of secret should be one of [16, 24, 32], then I changed the secret.
+
+![error](screenshots/Screenshot%202022-04-21%20012513.png)
+![error](screenshots/Screenshot%202022-04-21%20013839.png)
+
 ## TEST THAT EVERYTHING IS WORKING FINE
 
 - To get the cluster details run:
@@ -436,6 +506,8 @@ sudo systemctl status kube-scheduler
 ```sh
 kubectl cluster-info  --kubeconfig admin.kubeconfig
 ```
+
+![error](screenshots/Screenshot%202022-04-21%20014401.png)
 
 - To get the current namespaces:
 
@@ -449,11 +521,15 @@ kubectl get namespaces --kubeconfig admin.kubeconfig
 curl --cacert /var/lib/kubernetes/ca.pem https://$INTERNAL_IP:6443/version
 ```
 
+![error](screenshots/Screenshot%202022-04-21%20014837.png)
+
 - To get the status of each component:
 
 ```sh
 kubectl get componentstatuses --kubeconfig admin.kubeconfig
 ```
+
+![error](screenshots/Screenshot%202022-04-21%20014944.png)
 
 - On one of the controller nodes, configure Role Based Access Control (RBAC) so that the api-server has necessary authorization for for the kubelet. Create the ClusterRole:
 
@@ -501,6 +577,8 @@ subjects:
 EOF
 ```
 
+![error](screenshots/Screenshot%202022-04-21%20020238.png)
+
 ## CONFIGURING THE KUBERNETES WORKER NODES
 
 - SSH into the worker nodes
@@ -525,6 +603,8 @@ worker_3_ip=$(aws ec2 describe-instances \
 --output text --query 'Reservations[].Instances[].PublicIpAddress')
 ssh -i k8s-cluster-from-ground-up.id_rsa ubuntu@${worker_3_ip}
 ```
+
+![error](screenshots/Screenshot%202022-04-21%20022051.png)
 
 - Install OS dependencies:
 
@@ -633,6 +713,8 @@ wget -q --show-progress --https-only --timestamping \
 sudo tar -xvf cni-plugins-linux-amd64-v0.9.1.tgz -C /opt/cni/bin/
 ```
 
+![error](screenshots/Screenshot%202022-04-21%20025824.png)
+
 - Download binaries for kubectl, kube-proxy, and kubelet
 
 ```sh
@@ -714,6 +796,8 @@ sudo mv ${WORKER_NAME}.kubeconfig /var/lib/kubelet/kubeconfig
 sudo mv kube-proxy.kubeconfig /var/lib/kube-proxy/kubeconfig
 sudo mv ca.pem /var/lib/kubernetes/
 ```
+
+![error](screenshots/Screenshot%202022-04-21%20110417.png)
 
 - Create the kubelet-config.yaml file. Ensure the needed variables exist:
 
@@ -812,3 +896,7 @@ EOF
   sudo systemctl start containerd kubelet kube-proxy
 }
 ```
+
+![error](screenshots/Screenshot%202022-04-21%20135755.png)
+![error](screenshots/Screenshot%202022-04-21%20135817.png)
+![error](screenshots/Screenshot%202022-04-21%20164550.png)
