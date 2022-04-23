@@ -12,7 +12,7 @@ Default region name [None]: us-west-2
 Default output format [None]: json
 ```
 
-- Test your AWS CLI by running: `aws ec2 describe-vpcs`
+- Test your AWS CLI by running: `aws ec2 describe-vpcs`.
 
 - Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 
