@@ -182,7 +182,7 @@ KUBERNETES_PUBLIC_ADDRESS=$(aws elbv2 describe-load-balancers \
 # CREATE COMPUTE RESOURCES
 
 ## AMI
-
+sudo apt install jq -y
 ### Get an image to create EC2 instances:
 IMAGE_ID=$(aws ec2 describe-images --owners 099720109477 \
   --filters \
