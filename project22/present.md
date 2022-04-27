@@ -50,10 +50,10 @@ kubectl get pod -o yaml
 # or
 kubectl get pod -o json
 ```
+
 ![Screenshot 2022-04-26 062416](https://user-images.githubusercontent.com/80127136/165449390-bb74f4ed-9c72-423c-a34b-095968088968.png)
 ![Screenshot 2022-04-26 062523](https://user-images.githubusercontent.com/80127136/165449479-2b481c06-6e31-4ee5-884e-0e9176a18052.png)
 ![Screenshot 2022-04-26 063803](https://user-images.githubusercontent.com/80127136/165449556-77592fe5-69f2-4ec7-9bb5-28b0d9e13e56.png)
-
 
 ## ACCESSING THE APP FROM THE BROWSER
 
@@ -107,7 +107,6 @@ kubectl get service -o wide
 ![Screenshot 2022-04-26 084315](https://user-images.githubusercontent.com/80127136/165449826-d225f76d-e70c-4885-afa5-ea1edd6668a8.png)
 ![Screenshot 2022-04-26 085421](https://user-images.githubusercontent.com/80127136/165451675-79270e70-d78c-43d1-bd9d-8a47060d139f.png)
 
-
 - Change the service type to ClusterIP and run kubectl port-forward command
 kubectl  port-forward svc/nginx-service 8089:80
 ![Screenshot 2022-04-26 081358](https://user-images.githubusercontent.com/80127136/165449698-1e4fc071-b572-412c-9a8f-9d31a2b2bd74.png)
@@ -151,14 +150,15 @@ spec:
 ```sh
 kubectl apply -f rs.yaml
 ```
-![Screenshot 2022-04-26 092334](https://user-images.githubusercontent.com/80127136/165450354-0495a211-97fe-4b58-bfce-30d0dd031de2.png)
 
+![Screenshot 2022-04-26 092334](https://user-images.githubusercontent.com/80127136/165450354-0495a211-97fe-4b58-bfce-30d0dd031de2.png)
 
 - Check what ReplicaSet have been created:
 
 ```sh
 kubectl get pods
 ```
+
 ![Screenshot 2022-04-26 092410](https://user-images.githubusercontent.com/80127136/165450395-d66fd507-2736-4f75-9c6f-ee37328c370e.png)
 ![Screenshot 2022-04-26 092953](https://user-images.githubusercontent.com/80127136/165450456-b99dc848-dd00-4c83-b315-f137a327bc9d.png)
 ![Screenshot 2022-04-26 093147](https://user-images.githubusercontent.com/80127136/165450489-ea926539-f971-4d26-9a5d-b81d69efbda1.png)
@@ -172,7 +172,8 @@ kubectl get pods
   ```sh
   kubectl scale rs nginx-rs --replicas=5
   ```
-![Screenshot 2022-04-26 094025](https://user-images.githubusercontent.com/80127136/165450652-4a7fdf4c-c2e2-4814-91b2-7748a2d1afe9.png)
+
+  ![Screenshot 2022-04-26 094025](https://user-images.githubusercontent.com/80127136/165450652-4a7fdf4c-c2e2-4814-91b2-7748a2d1afe9.png)
 
   - Declarative way would be to open our rs.yaml manifest, change desired number of replicas in the respective section in the file.
   
@@ -186,7 +187,8 @@ kubectl get pods
   ```sh
    kubectl apply -f rs.yaml
    ```
-![Screenshot 2022-04-26 095713](https://user-images.githubusercontent.com/80127136/165450737-72e02f81-d392-4c39-808e-48854031414e.png)
+
+  ![Screenshot 2022-04-26 095713](https://user-images.githubusercontent.com/80127136/165450737-72e02f81-d392-4c39-808e-48854031414e.png)
 
   - There is another method – ‘ad-hoc’, it is definitely not the best practice and we do not recommend using it, but you can edit an existing ReplicaSet with following command:
 
@@ -194,7 +196,7 @@ kubectl get pods
    kubectl edit -f rs.yaml
    ```
 
-## Self Side Task:
+## Self Side Task
 
 - Build the Tooling app Dockerfile and push it to Dockerhub registry.
 
@@ -284,6 +286,7 @@ spec:
   ports:
   - port: 3306
 ```
+
 ![Screenshot 2022-04-26 170756](https://user-images.githubusercontent.com/80127136/165452246-73ca9ce7-f74f-4b25-ac33-1793ea75d34d.png)
 
 ![Screenshot 2022-04-26 170756](https://user-images.githubusercontent.com/80127136/165452141-1c6de952-2339-4880-80b9-e46494bfe15d.png)
@@ -323,6 +326,7 @@ spec:
             - containerPort: 80
               protocol: TCP
 ```
+
 ![Screenshot 2022-04-26 104831](https://user-images.githubusercontent.com/80127136/165450812-02a79f0f-f94d-4b66-b8c2-8a50470136ff.png)
 ![Screenshot 2022-04-26 105017](https://user-images.githubusercontent.com/80127136/165450838-dc0ad9b8-f31c-4e98-8ace-fe0b7e589bf3.png)
 ![Screenshot 2022-04-26 105313](https://user-images.githubusercontent.com/80127136/165450903-f1cffd1e-4b44-417d-89e5-b367648a8a98.png)
@@ -333,6 +337,7 @@ spec:
 ```sh
 kubectl exec -it <POD_NAME> -- bash
 ```
+
 ![Screenshot 2022-04-26 105729](https://user-images.githubusercontent.com/80127136/165451119-d39d665e-cb80-411c-bbff-1f086fcbc0c3.png)
 
 - List the files and folders in the Nginx directory
@@ -358,6 +363,6 @@ kubectl exec -it <POD_NAME> -- bash
 ```sh
  kubectl delete po nginx-deployment-56466d4948-tg9j8
 ```
+
 ![Screenshot 2022-04-26 114916](https://user-images.githubusercontent.com/80127136/165451508-dbce2293-8123-4a92-beb3-f684908043d0.png)
 ![Screenshot 2022-04-26 114959](https://user-images.githubusercontent.com/80127136/165451540-8aee0a85-ac71-4bab-bf04-a4a94c017937.png)
-
