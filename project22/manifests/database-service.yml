@@ -7,3 +7,5 @@ spec:
       app: database
   ports:
   - port: 3306
+
+  
