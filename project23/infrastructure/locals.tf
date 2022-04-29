@@ -21,7 +21,7 @@ locals {
       asg_desired_capacity    = var.autoscaling_minimum_size_by_az * length(data.aws_availability_zones.available_azs.zone_ids)
       asg_min_size            = var.autoscaling_minimum_size_by_az * length(data.aws_availability_zones.available_azs.zone_ids)
       asg_max_size            = var.autoscaling_maximum_size_by_az * length(data.aws_availability_zones.available_azs.zone_ids)
-      kubelet_extra_args      = "--node-labels=node.kubernetes.io/lifecycle=spot" # Using Spot instances means we can save a lot of money and scale to have even more instances.
+      kubelet_extra_args      = "--node-labels=node.kubernetes.io/lifecycle=spot" 
       public_ip               = true
     },
   ]
