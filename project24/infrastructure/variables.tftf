@@ -1,3 +1,4 @@
+# This is terraform.tfvars file
 region                  = "eu-central-1"
 cluster_name            = "tooling-app-eks"
 iac_environment_tag     = "development"
