@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: frontend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1a
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        volumeMounts:
+        - name: nginx-volume
+          mountPath: /tmp/gabriel/
+      volumes:
+        - name: nginx-volume
+          persistentVolumeClaim:
+            claimName: nginx-volume-claim
+
